@@ -8,7 +8,7 @@ func FizzBuzz(num int) string {
 		return "FizzBuzz"
 	}
 
-	if num%3 == 0 {
+	if isFizz(num) {
 		return "Fizz"
 	}
 
@@ -17,4 +17,8 @@ func FizzBuzz(num int) string {
 	}
 
 	return fmt.Sprintf("%d", num)
+}
+
+func isFizz(num int) bool {
+	return num%3 == 0
 }
