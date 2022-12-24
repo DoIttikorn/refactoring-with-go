@@ -2,14 +2,19 @@ package fizzbuzz
 
 import "fmt"
 
-func FizzBuzz(n int) string {
-	if n == 3 || n == 6 {
+func FizzBuzz(num int) string {
+
+	if num%15 == 0 {
+		return "FizzBuzz"
+	}
+
+	if num%3 == 0 {
 		return "Fizz"
 	}
 
-	if n == 5 {
+	if num%5 == 0 {
 		return "Buzz"
 	}
 
-	return fmt.Sprintf("%d", n)
+	return fmt.Sprintf("%d", num)
 }
