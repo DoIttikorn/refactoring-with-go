@@ -1,0 +1,22 @@
+mode: set
+github.com/anuchito/rental/customer.go:10.48,15.2 4 1
+github.com/anuchito/rental/customer.go:16.46,18.2 1 0
+github.com/anuchito/rental/customer.go:19.40,21.2 1 1
+github.com/anuchito/rental/customer.go:22.42,26.36 4 1
+github.com/anuchito/rental/customer.go:49.2,51.15 3 1
+github.com/anuchito/rental/customer.go:26.36,28.41 2 1
+github.com/anuchito/rental/customer.go:42.3,43.80 2 1
+github.com/anuchito/rental/customer.go:46.3,47.28 2 1
+github.com/anuchito/rental/customer.go:29.16,31.32 2 1
+github.com/anuchito/rental/customer.go:34.20,35.53 1 1
+github.com/anuchito/rental/customer.go:36.18,38.32 2 1
+github.com/anuchito/rental/customer.go:31.32,33.5 1 1
+github.com/anuchito/rental/customer.go:38.32,40.5 1 1
+github.com/anuchito/rental/customer.go:43.80,45.4 1 1
+github.com/anuchito/rental/movie.go:12.58,17.2 4 1
+github.com/anuchito/rental/movie.go:18.39,20.2 1 1
+github.com/anuchito/rental/movie.go:21.38,23.2 1 1
+github.com/anuchito/rental/movie.go:24.42,26.2 1 0
+github.com/anuchito/rental/rental.go:8.61,13.2 4 1
+github.com/anuchito/rental/rental.go:14.41,16.2 1 1
+github.com/anuchito/rental/rental.go:17.39,19.2 1 1
