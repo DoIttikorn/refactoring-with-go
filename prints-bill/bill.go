@@ -82,14 +82,12 @@ func totalVolumeCreditsFor(performance []Performance, plays Plays) float64 {
 	}
 	return result
 }
-func statement(invoice Invoice, plays Plays) string {
-	return renderPlainText(invoice, plays)
-}
 
 type Bill struct {
 	Customer           string
 	TotalAmount        float64
 	TotalVolumeCredits float64
+	Rates              []Rate
 }
 
 type Rate struct {
@@ -99,13 +97,12 @@ type Rate struct {
 	Audience      int
 }
 
+func statement(invoice Invoice, plays Plays) string {
+	return renderPlainText(invoice, plays)
+}
+
 func renderPlainText(invoice Invoice, plays Plays) string {
 	// แยกการคำนวณออกมาจาก renderPlainText
-	bill := Bill{
-		Customer:           invoice.Customer,
-		TotalAmount:        totalAmountFor(invoice, plays),
-		TotalVolumeCredits: totalVolumeCreditsFor(invoice.Performances, plays),
-	}
 
 	rates := []Rate{}
 
@@ -119,9 +116,16 @@ func renderPlainText(invoice Invoice, plays Plays) string {
 		rates = append(rates, r)
 	}
 
+	bill := Bill{
+		Customer:           invoice.Customer,
+		Rates:              rates,
+		TotalAmount:        totalAmountFor(invoice, plays),
+		TotalVolumeCredits: totalVolumeCreditsFor(invoice.Performances, plays),
+	}
+
 	result := fmt.Sprintf("Statement for %s\n", bill.Customer)
 
-	for _, r := range rates {
+	for _, r := range bill.Rates {
 		result += fmt.Sprintf("  %s: $%.2f (%d seats)\n", r.Play.Name, r.Amount/100, r.Audience)
 	}
 	result += fmt.Sprintf("Amount owed is $%.2f\n", bill.TotalAmount/100)
