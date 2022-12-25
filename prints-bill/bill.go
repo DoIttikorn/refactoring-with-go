@@ -119,10 +119,14 @@ func statement(invoice Invoice, plays Plays) string {
 		TotalVolumeCredits: totalVolumeCreditsFor(invoice.Performances, plays),
 	}
 
-	return renderPlainText(invoice, plays, bill)
+	return renderPlainText(bill)
 }
 
-func renderPlainText(invoice Invoice, plays Plays, bill Bill) string {
+// func renderHTML() string {
+// 	return ""
+// }
+
+func renderPlainText(bill Bill) string {
 
 	result := fmt.Sprintf("Statement for %s\n", bill.Customer)
 
