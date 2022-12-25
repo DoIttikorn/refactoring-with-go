@@ -37,6 +37,8 @@ func playFor(play Plays, perf Performance) Play {
 func amountFor(perf Performance, play Play) float64 {
 	result := 0.0
 
+	// ใช้ polymorphism แทนการใช้ switch
+
 	switch playType(play) {
 	case "tragedy":
 		result = 40000
@@ -66,9 +68,9 @@ func volumeCreditsFor(perf Performance, plays Plays) float64 {
 	return result
 }
 
-func totalAmountFor(invoice Invoice, plays Plays) float64 {
+func totalAmountFor(Performance []Performance, plays Plays) float64 {
 	result := 0.0
-	for _, perf := range invoice.Performances {
+	for _, perf := range Performance {
 		play := playFor(plays, perf)
 		result += amountFor(perf, play)
 	}
@@ -115,16 +117,27 @@ func statement(invoice Invoice, plays Plays) string {
 	bill := Bill{
 		Customer:           invoice.Customer,
 		Rates:              rates,
-		TotalAmount:        totalAmountFor(invoice, plays),
+		TotalAmount:        totalAmountFor(invoice.Performances, plays),
 		TotalVolumeCredits: totalVolumeCreditsFor(invoice.Performances, plays),
 	}
 
 	return renderPlainText(bill)
 }
 
-// func renderHTML() string {
-// 	return ""
-// }
+func renderHTML(bill Bill) string {
+	result := fmt.Sprintf("<h1>Statement for %s</h1>", bill.Customer)
+	result += "<table>"
+	result += "<tr><th>play</th><th>seats</th><th>cost</th></tr>"
+	for _, r := range bill.Rates {
+		result += fmt.Sprintf("<tr><td>%s</td><td>%d</td><td>$%.2f</td></tr>", r.Play.Name, r.Audience, r.Amount/100)
+
+	}
+	result += "</table>"
+	result += fmt.Sprintf("<p>Amount owed is <em>$%.2f</em></p>", bill.TotalAmount/100)
+	result += fmt.Sprintf("<p>you earned <em>%.0f</em> credits</p>", bill.TotalVolumeCredits)
+
+	return result
+}
 
 func renderPlainText(bill Bill) string {
 
