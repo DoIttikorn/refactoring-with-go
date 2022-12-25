@@ -98,12 +98,8 @@ type Rate struct {
 }
 
 func statement(invoice Invoice, plays Plays) string {
-	return renderPlainText(invoice, plays)
-}
 
-func renderPlainText(invoice Invoice, plays Plays) string {
-	// แยกการคำนวณออกมาจาก renderPlainText
-
+	// แยกส่วนของ data ออกมาจาก renderPlainText
 	rates := []Rate{}
 
 	for _, perf := range invoice.Performances {
@@ -122,6 +118,11 @@ func renderPlainText(invoice Invoice, plays Plays) string {
 		TotalAmount:        totalAmountFor(invoice, plays),
 		TotalVolumeCredits: totalVolumeCreditsFor(invoice.Performances, plays),
 	}
+
+	return renderPlainText(invoice, plays, bill)
+}
+
+func renderPlainText(invoice Invoice, plays Plays, bill Bill) string {
 
 	result := fmt.Sprintf("Statement for %s\n", bill.Customer)
 
