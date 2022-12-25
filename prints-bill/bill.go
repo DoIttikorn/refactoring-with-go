@@ -120,16 +120,6 @@ func renderPlainText(invoice Invoice, plays Plays) string {
 	}
 
 	result := fmt.Sprintf("Statement for %s\n", bill.Customer)
-	// for _, perf := range invoice.Performances {
-	// 	r := Rate{
-	// 		Play:          playFor(plays, perf),
-	// 		Amount:        amountFor(perf, playFor(plays, perf)),
-	// 		VolumeCredits: volumeCreditsFor(perf, plays),
-	// 		Audience:      perf.Audience,
-	// 	}
-
-	// 	result += fmt.Sprintf("  %s: $%.2f (%d seats)\n", r.Play.Name, r.Amount/100, r.Audience)
-	// }
 
 	for _, r := range rates {
 		result += fmt.Sprintf("  %s: $%.2f (%d seats)\n", r.Play.Name, r.Amount/100, r.Audience)
