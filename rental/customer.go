@@ -7,11 +7,12 @@ type Customer struct {
 	rentals []Rental
 }
 
-func NewCustomer(name string) (rcvr Customer) {
-	rcvr = Customer{}
-	rcvr.rentals = make([]Rental, 0)
-	rcvr.name = name
-	return
+func NewCustomer(name string) Customer {
+	return Customer{
+		name:    name,
+		rentals: []Rental{},
+	}
+
 }
 func (rcvr Customer) AddRental(arg Rental) {
 	rcvr.rentals = append(rcvr.rentals, arg)
