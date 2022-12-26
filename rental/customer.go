@@ -62,15 +62,31 @@ func getTotalPoint(rentals []Rental) int {
 	return result
 }
 
+type PriceManager struct {
+	point  int
+	amount float64
+}
+
+type RentalManager struct {
+	title  string
+	amount float64
+}
+
 func (c Customer) Statement() string {
-	frequentRenterPoints := getTotalPoint(c.rentals)
-	totalAmount := getTotalAmount(c.rentals)
+	pm := PriceManager{
+		point:  getTotalPoint(c.rentals),
+		amount: getTotalAmount(c.rentals),
+	}
 
 	result := fmt.Sprintf("Rental Record for %v\n", c.Name())
 	for _, r := range c.rentals {
-		result += fmt.Sprintf("\t%v\t%.1f\n", r.Movie().Title(), r.Charge())
+		rm := RentalManager{
+			title:  r.Movie().Title(),
+			amount: r.Charge(),
+		}
+		result += fmt.Sprintf("\t%v\t%.1f\n", rm.title, rm.amount)
 	}
-	result += fmt.Sprintf("Amount owed is %.1f\n", totalAmount)
-	result += fmt.Sprintf("You earned %v frequent renter points", frequentRenterPoints)
+	result += fmt.Sprintf("Amount owed is %.1f\n", pm.amount)
+	result += fmt.Sprintf("You earned %v frequent renter points", pm.point)
 	return result
 }
