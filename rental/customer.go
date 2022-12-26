@@ -39,13 +39,10 @@ func (r Rental) Charge() float64 {
 }
 
 func getPoint(r Rental) int {
-	frequentRenterPoints := 0
-	frequentRenterPoints++
 	if r.Movie().PriceCode() == NEW_RELEASE && r.DaysRented() > 1 {
-		frequentRenterPoints++
+		return 2
 	}
-
-	return frequentRenterPoints
+	return 1
 }
 
 func (rcvr Customer) Statement() string {
