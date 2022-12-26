@@ -16,7 +16,9 @@ http --verbose GET "http://localhost:8080/db/mykey?format=json"
 # DELETE
 http --verbose DELETE "http://localhost:8080/db/mykey"
 ```
+
 # Usage script
+
 `/usage.sh`
 
 ### Development
@@ -36,3 +38,5 @@ make clean
 # run without makefile (assumes static binary is already there)
 PORT=8080 DB_FILENAME=${DB_FILE} ./app
 ```
+
+### learn dependency injection
