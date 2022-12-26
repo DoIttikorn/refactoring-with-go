@@ -14,10 +14,6 @@ func setup(t *testing.T) (io.ReadWriteSeeker, func()) {
 
 	file := filebuffer.New(nil)
 
-	// file, err := os.CreateTemp("", "dbstore")
-	// if err != nil {
-	// 	t.Fatalf("error creating temp file %v", err)
-	// }
 	teardown := func() {
 		file.Close()
 	}
