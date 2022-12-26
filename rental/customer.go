@@ -19,30 +19,6 @@ func (c Customer) Name() string {
 	return c.name
 }
 
-func regularCharge(daysRented int) float64 {
-	result := 2.0
-	if daysRented > 2 {
-		result += float64(daysRented-2) * 1.5
-	}
-	return result
-}
-
-func childrenCharge(daysRented int) float64 {
-	result := 1.5
-	if daysRented > 3 {
-		result += float64(daysRented-3) * 1.5
-	}
-	return result
-}
-
-func newReleaseCharge(daysRented int) float64 {
-	return float64(daysRented) * 3.0
-}
-
-func (r Rental) Charge() float64 {
-	return r.movie.Charger.Charge(r.daysRented)
-}
-
 func getPoint(r Rental) int {
 	if r.Movie().PriceCode() == NEW_RELEASE && r.DaysRented() > 1 {
 		return 2
