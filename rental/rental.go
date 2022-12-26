@@ -18,6 +18,11 @@ func (r Rental) Movie() Movie {
 	return r.movie
 }
 
+// จะเกิด Inappropriate Intimacy กับ Movie
+// func (r Rental) Charge() float64 {
+// 	return r.movie.Price.Charge(r.daysRented)
+// }
+
 func (r Rental) Charge() float64 {
-	return r.movie.Price.Charge(r.daysRented)
+	return r.movie.Charge(r.daysRented)
 }
