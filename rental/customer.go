@@ -72,12 +72,7 @@ type RentalManager struct {
 	amount float64
 }
 
-func (c Customer) Statement() string {
-	pm := PriceManager{
-		point:  getTotalPoint(c.rentals),
-		amount: getTotalAmount(c.rentals),
-	}
-
+func (c Customer) renderPlainText(amount float64, point int) string {
 	result := fmt.Sprintf("Rental Record for %v\n", c.Name())
 	for _, r := range c.rentals {
 		rm := RentalManager{
@@ -86,7 +81,16 @@ func (c Customer) Statement() string {
 		}
 		result += fmt.Sprintf("\t%v\t%.1f\n", rm.title, rm.amount)
 	}
-	result += fmt.Sprintf("Amount owed is %.1f\n", pm.amount)
-	result += fmt.Sprintf("You earned %v frequent renter points", pm.point)
+	result += fmt.Sprintf("Amount owed is %.1f\n", amount)
+	result += fmt.Sprintf("You earned %v frequent renter points", point)
 	return result
+}
+
+func (c Customer) Statement() string {
+	pm := PriceManager{
+		point:  getTotalPoint(c.rentals),
+		amount: getTotalAmount(c.rentals),
+	}
+
+	return c.renderPlainText(pm.amount, pm.point)
 }
