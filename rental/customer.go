@@ -15,8 +15,8 @@ func NewCustomer(name string) Customer {
 
 }
 
-func (rcvr Customer) Name() string {
-	return rcvr.name
+func (c Customer) Name() string {
+	return c.name
 }
 
 func regularCharge(daysRented int) float64 {
@@ -40,15 +40,7 @@ func newReleaseCharge(daysRented int) float64 {
 }
 
 func (r Rental) Charge() float64 {
-	switch r.Movie().PriceCode() {
-	case REGULAR:
-		return regularCharge(r.DaysRented())
-	case NEW_RELEASE:
-		return newReleaseCharge(r.DaysRented())
-	case CHILDRENS:
-		return childrenCharge(r.DaysRented())
-	}
-	return 0.0
+	return r.movie.Charger.Charge(r.daysRented)
 }
 
 func getPoint(r Rental) int {
