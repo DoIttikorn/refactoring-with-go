@@ -2,7 +2,7 @@ package rental
 
 const (
 	_ = iota
-	CHILDRENS
+	CHILDREN
 	NEW_RELEASE
 	REGULAR
 )
@@ -12,24 +12,24 @@ type Pricer interface {
 	PriceCode() int
 }
 
-type Childrens struct {
+type Children struct {
 	priceCode int
 }
 
-func (c Childrens) Charge(daysRented int) float64 {
+func (c Children) Charge(daysRented int) float64 {
 	result := 1.5
 	if daysRented > 3 {
 		result += float64(daysRented-3) * 1.5
 	}
 	return result
 }
-func (c Childrens) PriceCode() int {
+func (c Children) PriceCode() int {
 	return c.priceCode
 }
 
-func CreateChildrens() Childrens {
-	return Childrens{
-		priceCode: CHILDRENS,
+func CreateChildren() Children {
+	return Children{
+		priceCode: CHILDREN,
 	}
 }
 
